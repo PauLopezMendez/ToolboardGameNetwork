@@ -6,8 +6,8 @@
         "type": "pwa-node",
         "request": "launch",
         "runtimeExecutable": "node",
-        "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"],
-        "args": ["src/index.ts"],
+        "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+        "args": ["${workspaceRoot}/index.ts"],
         "cwd": "${workspaceRoot}",
         "internalConsoleOptions": "openOnSessionStart",
         "resolveSourceMapLocations": [

@@ -17,5 +17,5 @@
     },
     "include": [
       "src"
-    ]
+, "index.ts", "state.ts", "state.ts"    ]
 }

@@ -7,12 +7,30 @@ export class GameRoom extends Room<State>{
     playerCount: number = 0
     playerHand: Array<string>;
 
-    onCreate(options: any): void | Promise<any> {
-        console.log('room created');
+    onInit(option) {
+        console.log('room created', this.roomId);
+        console.log(this.roomName);
         this.reset();
+    }
 
-        this.onMessage("*", (client, message) => {
-            console.log('message', message);
+    onJoin(client: Client) {
+        console.log('player joined', client.sessionId);
+
+        let player: Player = new Player();
+        player.sessionId = client.sessionId;
+        player.seat = this.playerCount + 1;
+
+        this.state.players[client.sessionId] = player;
+        this.playerCount++;
+
+        if (this.playerCount == 2){
+            this.state.phase = 'Recruit';
+            this.lock();
+        }
+    }
+
+    onMessage(client: Client, message: any) {
+        console.log('message', message);
             if (!message) return;
             
             let player: Player = this.state.players[client.sessionId];
@@ -36,28 +54,10 @@ export class GameRoom extends Room<State>{
                     let shopIndex: number = message['recruitsLeftShop'];
                     this.state.shop[shopIndex] = false;
                     break;
-                
             }
-        });        
     }
 
-    onJoin(client: Client, options?: any, auth?: any): void | Promise<any> {
-        console.log('player joined', client.sessionId);
-
-        let player: Player = new Player();
-        player.sessionId = client.sessionId;
-        player.seat = this.playerCount + 1;
-
-        this.state.players[client.sessionId] = player;
-        this.playerCount++;
-
-        if (this.playerCount == 2){
-            this.state.phase = 'Recruit';
-            this.lock();
-        }
-    }
-
-    onLeave(client: Client, consented?: boolean): void | Promise<any> {
+    onLeave(client: Client) {
         console.log('player left', client.sessionId);
 
         delete this.state.players[client.sessionId];
@@ -65,7 +65,7 @@ export class GameRoom extends Room<State>{
         this.state.phase = 'waiting';
     }
 
-    onDispose(): void | Promise<any> {
+    onDispose() {
         console.log('room disposed');
     }
 
