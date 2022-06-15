@@ -7,7 +7,7 @@
         "request": "launch",
         "runtimeExecutable": "node",
         "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
-        "args": ["${workspaceRoot}/index.ts"],
+        "args": ["${workspaceRoot}/src/index.ts"],
         "cwd": "${workspaceRoot}",
         "internalConsoleOptions": "openOnSessionStart",
         "resolveSourceMapLocations": [

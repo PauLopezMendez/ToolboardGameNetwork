@@ -21,10 +21,20 @@ export class State extends Schema {
     @type('int16')
     winningPlayer: number = -1;
 
-    @type(['boolean'])
-    shop: ArraySchema<boolean> = new ArraySchema<boolean>();
+    @type(['string'])
+    cards: ArraySchema<string> = new ArraySchema<string>();
+    // 0-2 recruits1
+    // 3-5 recruits2
+    // 6-9 shop
+    // 10-18 toolboard 1
+    // 19-27 toolboard 2
 
     @type('int16')
     playersSkipped: number = 0;
 
+    @type(['string'])
+    recruitsToDestroy: ArraySchema<string> = new ArraySchema<string>();
+
+    @type('boolean')
+    firstTurn: boolean = true;
 }

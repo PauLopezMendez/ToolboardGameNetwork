@@ -25,8 +25,9 @@
     "uwebsockets-express": "^1.1.14"
   },
   "dependencies": {
+    "@colyseus/monitor": "^0.14.0",
     "@colyseus/schema": "^0.5.10",
-    "colyseus": "^0.10.7",
+    "colyseus": "^0.10.9",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "serve-index": "^1.8.0",
